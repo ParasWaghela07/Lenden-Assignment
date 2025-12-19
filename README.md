@@ -159,7 +159,7 @@ npm test
 
 ## AI Tool Usage
 
-An AI tool was used in the development of this project for the following purposes:
+An AI tool (**ChatGPT**) was used in the development of this project for the following purposes:
 
 1. **Token Validation Utility**
 
