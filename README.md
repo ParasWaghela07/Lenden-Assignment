@@ -22,8 +22,15 @@ The frontend is developed using **React.js with Vite** and styled using **Tailwi
 
 ---
 
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
+### Code Repository
+
+```bash
+git clone https://github.com/ParasWaghela07/Lenden-Assignment.git
+cd Lenden-Assignment
+```
+
+---
+
 
 ### Backend Setup
 
