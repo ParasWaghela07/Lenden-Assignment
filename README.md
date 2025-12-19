@@ -114,6 +114,6 @@ Authorization: Bearer <JWT_TOKEN>
   email: String,
   passwordHash: String,
   aadhaarEncrypted: String,
-  createdAt: Date,
-  updatedAt: Date
+  createdAt: Date, (added by mongoodb)
+  updatedAt: Date (added by mongoodb)
 }
