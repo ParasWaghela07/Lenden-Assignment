@@ -1,4 +1,4 @@
-# Secure User Profile & Access Control System
+## Secure User Profile & Access Control System
 
 ## Project Overview
 
@@ -30,7 +30,6 @@ cd Lenden-Assignment
 ```
 
 ---
-
 
 ### Backend Setup
 
@@ -94,12 +93,49 @@ http://localhost:5173
 | POST   | `/api/auth/login`   | Login existing user                      |
 | GET    | `/api/user/profile` | Fetch logged-in user profile (Protected) |
 
-### Authorization
+---
 
-All protected routes require a JWT token in the header:
+## Authorization & Token Validation
+
+* JWT tokens are issued on **successful login or signup**.
+* Tokens are sent from the client in the request header:
 
 ```http
 Authorization: Bearer <JWT_TOKEN>
+```
+
+* A **token validation middleware** verifies:
+
+  * Token authenticity using `JWT_SECRET`
+  * Token expiration
+  * User identity before granting access to protected routes
+
+Only authenticated users with a valid token can access secure endpoints such as the profile API.
+
+---
+
+## Security & Testing
+
+### Aadhaar Encryption / Decryption
+
+* Aadhaar numbers are encrypted using **AES-256-GCM** before being stored.
+* Decryption happens only on the server when returning data to authenticated users.
+* A unique IV is generated for every encryption to ensure ciphertext randomness.
+
+### Unit Testing
+
+* **Jest** is used for backend unit testing.
+* Comprehensive unit tests validate:
+
+  * Successful encryption of Aadhaar numbers
+  * Correct decryption back to original data
+  * Failure on tampered encrypted data
+  * Different ciphertexts for the same Aadhaar input
+
+Run tests using:
+
+```bash
+npm test
 ```
 
 ---
@@ -114,6 +150,26 @@ Authorization: Bearer <JWT_TOKEN>
   email: String,
   passwordHash: String,
   aadhaarEncrypted: String,
-  createdAt: Date, (added by mongoodb)
-  updatedAt: Date (added by mongoodb)
+  createdAt: Date, // added by MongoDB
+  updatedAt: Date  // added by MongoDB
 }
+```
+
+---
+
+## AI Tool Usage
+
+An AI tool (**ChatGPT**) was used in the development of this project for the following purposes:
+
+1. **Token Validation Utility**
+
+   * Assisted in designing and validating a secure JWT-based authentication middleware to protect backend routes.
+
+2. **Unit Testing for Encryption/Decryption**
+
+   * Helped generate AES-256-GCM based Aadhaar encryption/decryption utilities.
+   * Created comprehensive Jest unit tests to validate correctness, randomness, and tamper detection of encrypted data.
+
+The AI tool was used strictly as a **development aid** to enhance security, correctness, and testing quality.
+
+---
