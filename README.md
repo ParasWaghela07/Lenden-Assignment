@@ -22,6 +22,9 @@ The frontend is developed using **React.js with Vite** and styled using **Tailwi
 
 ---
 
+git clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
+
 ### Backend Setup
 
 ```bash
