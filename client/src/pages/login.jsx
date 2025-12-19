@@ -15,71 +15,88 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    const res = await loginApi(formData);
-    
-    setAuthToken(res.data.token);
-    toast.success(res.data.message);
-
-    navigate("/profile");
-  } catch (error) {
-    toast.error(
-      error.response?.data?.message || "Invalid email or password"
-    );
-  }
-};
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const loadingToast = toast.loading("Logging in...");
+    try {
+      const res = await loginApi(formData);
+      setAuthToken(res.data.token);
+      toast.dismiss(loadingToast);
+      toast.success(res.data.message);
+      navigate("/");
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      toast.error(
+        error.response?.data?.message || "Invalid email or password"
+      );
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-8 rounded-lg shadow-md"
-      >
-        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 px-4 py-8">
+      <div className="max-w-md w-full bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700">
+        <div className="text-center mb-7">
+          <h2 className="text-3xl font-bold text-white">Welcome Back</h2>
+          <p className="text-gray-400 mt-2">Login to your account</p>
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Email Address
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
+              placeholder="you@example.com"
+            />
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
+              placeholder="Enter your password"
+            />
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 transition duration-200 shadow-lg hover:shadow-xl"
+          >
+            Login
+          </button>
+        </form>
 
-        <p className="text-center text-sm mt-4">
-          Don’t have an account?{" "}
+        <div className="mt-6 text-center text-sm text-gray-400">
+          Don't have an account?{" "}
           <Link
             to="/signup"
-            className="text-blue-600 hover:underline font-medium"
+            className="text-indigo-400 font-semibold hover:text-indigo-300 transition duration-200"
           >
             Sign up
           </Link>
-        </p>
-      </form>
+        </div>
+      </div>
     </div>
   );
 };

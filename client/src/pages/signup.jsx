@@ -17,91 +17,128 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const loadingToast = toast.loading("Creating account...");
+    try {
+      const res = await signupApi(formData);
 
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    const res = await signupApi(formData);
-
-    setAuthToken(res.data.token);
-    toast.success(res.data.message);
-    
-    navigate("/profile");
-  } catch (error) {
-    toast.error(
-      error.response?.data?.message || "Signup failed"
-    );
-  }
-};
+      setAuthToken(res.data.token);
+      toast.dismiss(loadingToast);
+      toast.success(res.data.message);
+      
+      navigate("/");
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      toast.error(
+        error.response?.data?.message || "Signup failed"
+      );
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-8 rounded-lg shadow-md"
-      >
-        <h2 className="text-2xl font-semibold text-center mb-6">Create Account</h2>
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 px-4 py-8">
+      <div className="max-w-md w-full bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700">
+        <div className="text-center mb-7">
+          <h2 className="text-3xl font-bold text-white">Create Account</h2>
+          <p className="text-gray-400 mt-2">Sign up to get started</p>
+        </div>
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Full Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="John Doe"
+              className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Email Address
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="you@example.com"
+              className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Create a strong password"
+              className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input
-          type="text"
-          name="aadhaarNumber"
-          placeholder="Aadhaar Number"
-          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.aadhaarNumber}
-          onChange={handleChange}
-          required
-        />
+          <div>
+            <label
+              htmlFor="aadhaarNumber"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Aadhaar Number
+            </label>
+            <input
+              type="text"
+              name="aadhaarNumber"
+              id="aadhaarNumber"
+              placeholder="1234 5678 9012"
+              className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 outline-none"
+              value={formData.aadhaarNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition"
-        >
-          Sign Up
-        </button>
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 focus:ring-4 focus:ring-green-300 transition duration-200 shadow-lg hover:shadow-xl mt-2"
+          >
+            Sign Up
+          </button>
+        </form>
 
-        <p className="text-center text-sm mt-4">
+        <div className="mt-6 text-center text-sm text-gray-400">
           Already registered?{" "}
           <Link
             to="/login"
-            className="text-blue-600 hover:underline font-medium"
+            className="text-indigo-400 font-semibold hover:text-indigo-300 transition duration-200"
           >
             Login
           </Link>
-        </p>
-      </form>
+        </div>
+      </div>
     </div>
   );
 };

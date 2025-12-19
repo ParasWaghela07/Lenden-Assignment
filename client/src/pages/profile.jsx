@@ -4,6 +4,7 @@ import { getProfileApi } from "../api/auth.api";
 import { clearAuthToken } from "../utils/authToken";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
+
 const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -29,8 +30,11 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">Loading profile...</p>
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 mb-4"></div>
+          <p className="text-gray-400 text-lg">Loading profile...</p>
+        </div>
       </div>
     );
   }
@@ -38,28 +42,34 @@ const Profile = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold text-center mb-6">
-          User Profile
-        </h2>
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center px-4 py-6">
+      <div className="w-full max-w-sm bg-gray-800 rounded-xl shadow-2xl p-6 border border-gray-700">
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 bg-linear-to-br from-indigo-500 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+            <span className="text-2xl font-bold text-white">
+              {user.name.charAt(0).toUpperCase()}
+            </span>
+          </div>
+          <h2 className="text-2xl font-bold text-white">User Profile</h2>
+          <p className="text-gray-400 mt-1 text-sm">Your account information</p>
+        </div>
 
-        <div className="space-y-4">
-          <div>
-            <p className="text-sm text-gray-500">Name</p>
-            <p className="font-medium">{user.name}</p>
+        <div className="space-y-3">
+          <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
+            <p className="text-xs text-gray-400 mb-1">Name</p>
+            <p className="font-semibold text-white">{user.name}</p>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-500">Email</p>
-            <p className="font-medium">{user.email}</p>
+          <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
+            <p className="text-xs text-gray-400 mb-1">Email</p>
+            <p className="font-semibold text-white">{user.email}</p>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-500 mb-1">Aadhaar Number</p>
+          <div className="bg-gray-700 rounded-lg p-3 border border-gray-600">
+            <p className="text-xs text-gray-400 mb-1.5">Aadhaar Number</p>
 
             <div className="flex items-center justify-between">
-              <p className="font-medium tracking-wider">
+              <p className="font-semibold text-white tracking-wider">
                 {showAadhaar
                   ? user.aadhaarNumber
                   : maskAadhaar(user.aadhaarNumber)}
@@ -67,10 +77,14 @@ const Profile = () => {
 
               <button
                 onClick={() => setShowAadhaar((prev) => !prev)}
-                className="text-gray-600 hover:text-gray-900 transition cursor-pointer"
+                className="text-gray-400 hover:text-indigo-400 transition duration-200 cursor-pointer p-1.5"
                 aria-label={showAadhaar ? "Hide Aadhaar" : "Show Aadhaar"}
               >
-                {showAadhaar ? <FaEyeSlash /> : <FaEye />}
+                {showAadhaar ? (
+                  <FaEyeSlash className="text-lg" />
+                ) : (
+                  <FaEye className="text-lg" />
+                )}
               </button>
             </div>
           </div>
@@ -79,10 +93,10 @@ const Profile = () => {
         <button
           onClick={() => {
             clearAuthToken();
-            toast.success("User logged out")
+            toast.success("User logged out");
             navigate("/login");
           }}
-          className="mt-6 w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition"
+          className="mt-5 w-full bg-red-600 text-white py-2.5 rounded-lg font-semibold hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition duration-200 shadow-lg hover:shadow-xl text-sm"
         >
           Logout
         </button>

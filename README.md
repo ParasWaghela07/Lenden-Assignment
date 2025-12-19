@@ -170,10 +170,10 @@ An AI tool (**ChatGPT**) was used in the development of this project for the fol
    * Helped generate AES-256-GCM based Aadhaar encryption/decryption utilities.
    * Created comprehensive Jest unit tests to validate correctness, randomness, and tamper detection of encrypted data.
 
-3. **Frontend Page Design using Tailwind CSS**
+3. **Frontend UI Styling and Color Design**
 
-   * Assisted in designing responsive and visually consistent frontend pages using Tailwind CSS utility classes.
-   * Helped structure form layouts, authentication pages, and profile UI components efficiently.
+   * Used **Claude** to assist with frontend **UI styling decisions**, including color schemes and visual appearance using Tailwind CSS.
+   * Used **ChatGPT** to resolve browser-specific styling issues such as input autofill background, text color, caret color, and text selection styling to maintain consistency in dark-themed input fields.
 
 4. **Documentation Formatting and Structuring**
 
