@@ -40,7 +40,7 @@ npm install
 Create a `.env` file inside the `server` directory:
 
 ```env
-PORT=5000
+PORT=4000
 MONGOURL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 AADHAAR_ENCRYPTION_KEY=your_32_byte_hex_key
@@ -55,7 +55,7 @@ npm run dev
 Backend runs on:
 
 ```
-http://localhost:5000
+http://localhost:4000
 ```
 
 ---
@@ -71,7 +71,7 @@ npm run dev
 Create a `.env` file inside the `client` directory:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000/api
+VITE_API_BASE_URL=http://localhost:4000/api
 ```
 
 Frontend runs on:
