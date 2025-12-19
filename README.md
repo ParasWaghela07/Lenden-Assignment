@@ -1,11 +1,3 @@
-Perfect, thanks for the detailed explanation 👍
-Below is a **clean, professional, hiring-grade `README.md`** written **exactly as per the submission guidelines** you shared.
-You can **copy-paste this directly** into your **root `README.md`**.
-
-I have **refined your wording**, fixed grammar, and structured it clearly **without changing your actual work**.
-
----
-
 # Secure User Profile & Access Control System
 
 ## Project Overview
