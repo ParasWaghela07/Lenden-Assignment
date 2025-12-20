@@ -96,7 +96,7 @@ const Profile = () => {
             toast.success("User logged out");
             navigate("/login");
           }}
-          className="mt-5 w-full bg-red-600 text-white py-2.5 rounded-lg font-semibold hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition duration-200 shadow-lg hover:shadow-xl text-sm"
+          className="mt-5 w-full bg-red-600 text-white py-2.5 rounded-lg font-semibold hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition duration-200 shadow-lg hover:shadow-xl text-sm cursor-pointer"
         >
           Logout
         </button>
