@@ -70,9 +70,7 @@ const Profile = () => {
 
             <div className="flex items-center justify-between">
               <p className="font-semibold text-white tracking-wider">
-                {showAadhaar
-                  ? user.aadhaarNumber
-                  : maskAadhaar(user.aadhaarNumber)}
+                {formatAadhaar(user.aadhaarNumber, showAadhaar)}
               </p>
 
               <button
@@ -105,10 +103,17 @@ const Profile = () => {
   );
 };
 
-// Mask Aadhaar → XXXX-XXXX-1234
-const maskAadhaar = (aadhaar) => {
+const formatAadhaar = (aadhaar, show = false) => {
   if (!aadhaar) return "";
-  return aadhaar.replace(/\d(?=\d{4})/g, "X");
+
+  const visible = aadhaar.slice(-4);
+  const masked = show
+    ? aadhaar
+    : "XXXXXXXX" + visible; // mask first 8 digits
+
+  // group into XXXX XXXX XXXX
+  return masked.match(/.{1,4}/g).join(" ");
 };
+
 
 export default Profile;
