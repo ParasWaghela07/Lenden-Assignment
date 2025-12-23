@@ -10,9 +10,9 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <ProtectedRoute>
+      <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Profile />} />
-      </ProtectedRoute>
+      </Route>
     </Routes>
   );
 }

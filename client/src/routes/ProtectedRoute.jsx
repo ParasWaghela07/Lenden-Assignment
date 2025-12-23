@@ -1,15 +1,9 @@
-import { Navigate } from "react-router-dom";
-import { getAuthToken, clearAuthToken } from "../utils/authToken";
+import { Navigate, Outlet } from "react-router-dom";
+import { getAuthToken } from "../utils/authToken";
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = () => {
   const token = getAuthToken();
-
-  if (!token) {
-    clearAuthToken();
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
+  return token ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;
