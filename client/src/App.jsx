@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Profile from "./pages/profile";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import "./App.css";
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Profile />} />
+      <ProtectedRoute>
+        <Route path="/" element={<Profile />} />
+      </ProtectedRoute>
     </Routes>
   );
 }
