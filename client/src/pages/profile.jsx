@@ -107,13 +107,10 @@ const formatAadhaar = (aadhaar, show = false) => {
   if (!aadhaar) return "";
 
   const visible = aadhaar.slice(-4);
-  const masked = show
-    ? aadhaar
-    : "XXXXXXXX" + visible; // mask first 8 digits
+  const masked = show ? aadhaar : "XXXXXXXX" + visible; // mask first 8 digits
 
   // group into XXXX XXXX XXXX
   return masked.match(/.{1,4}/g).join(" ");
 };
-
 
 export default Profile;

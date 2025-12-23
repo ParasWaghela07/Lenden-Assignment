@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupApi } from "../api/auth.api";
 import { setAuthToken } from "../utils/authToken";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -30,13 +29,11 @@ const Signup = () => {
       setAuthToken(res.data.token);
       toast.dismiss(loadingToast);
       toast.success(res.data.message);
-      
+
       navigate("/");
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(
-        error.response?.data?.message || "Signup failed"
-      );
+      toast.error(error.response?.data?.message || "Signup failed");
     }
   };
 
@@ -87,36 +84,35 @@ const Signup = () => {
             />
           </div>
 
-<div>
-  <label
-    htmlFor="password"
-    className="block text-sm font-medium text-gray-300 mb-2"
-  >
-    Password
-  </label>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Password
+            </label>
 
-  <div className="relative">
-    <input
-      type={showPassword ? "text" : "password"}
-      name="password"
-      id="password"
-      value={formData.password}
-      onChange={handleChange}
-      required
-      className="w-full px-4 py-3 pr-12 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 outline-none"
-      placeholder="Enter your password"
-    />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 pr-12 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 outline-none"
+                placeholder="Enter your password"
+              />
 
-    <button
-      type="button"
-      onClick={() => setShowPassword(!showPassword)}
-      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
-    >
-      {showPassword ? <FaEyeSlash /> : <FaEye />}
-    </button>
-  </div>
-</div>
-
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+          </div>
 
           <div>
             <label
